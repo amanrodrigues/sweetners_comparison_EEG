@@ -1,0 +1,17 @@
+8
+512
+1024
+4
+100
+
+C:\Users\Thais\Desktop\EEG\0.DADOS\Carolina_Mônica_dos_Santos\28.11\MATLAB\carolmonica0216_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Carolina_Mônica_dos_Santos\28.11\MATLAB\carolmonica0398_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Carolina_Mônica_dos_Santos\28.11\MATLAB\carolmonica0512_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Carolina_Mônica_dos_Santos\28.11\MATLAB\carolmonica2291_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Carolina_Mônica_dos_Santos\28.11\MATLAB\carolmonica2909_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Carolina_Mônica_dos_Santos\28.11\MATLAB\carolmonica3265_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Carolina_Mônica_dos_Santos\28.11\MATLAB\carolmonicaagua35_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Carolina_Mônica_dos_Santos\28.11\MATLAB\carolmonicaagua36_data.txt
+
+
+

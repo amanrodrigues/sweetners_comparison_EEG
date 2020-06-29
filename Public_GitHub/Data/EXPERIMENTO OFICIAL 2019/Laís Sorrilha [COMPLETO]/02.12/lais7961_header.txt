@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,lais7961                                                                        ,                                                                                ,02.12.19,11.35.32,768     ,                                            ,20,1       ,2

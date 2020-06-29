@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,carolinamonica2254                                                              ,                                                                                ,12.11.19,18.08.28,768     ,                                            ,20,1       ,2

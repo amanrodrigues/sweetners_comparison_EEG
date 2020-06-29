@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,beatrizagua07                                                                   ,                                                                                ,08.11.19,14.09.20,768     ,                                            ,20,1       ,2

@@ -1,0 +1,3 @@
+Signal,Label,Transducer,Units,Min,Max,Dmin,Dmax,PreFilter,Smp/Rec,Reserved
+1,C3              ,EEG                                                                             ,uV      ,-1500.000000,1500.000000,-32768,32767,Passa baixa = 40Notch = 60                                                      ,512,                                
+2,C4              ,EEG                                                                             ,uV      ,-1500.000000,1500.000000,-32768,32767,Passa baixa = 40Notch = 60                                                      ,512,                                

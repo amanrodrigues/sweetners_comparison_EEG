@@ -1,0 +1,14 @@
+8
+512
+1024
+4
+100
+
+C:\Users\Thais\Desktop\EEG\0.DADOS\Orlando_Anteghini_COMPLETO\27.11\MATLAB\orlando2050_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Orlando_Anteghini_COMPLETO\27.11\MATLAB\orlando3715_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Orlando_Anteghini_COMPLETO\27.11\MATLAB\orlando4829_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Orlando_Anteghini_COMPLETO\27.11\MATLAB\orlando6057_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Orlando_Anteghini_COMPLETO\27.11\MATLAB\orlando7145_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Orlando_Anteghini_COMPLETO\27.11\MATLAB\orlando9180_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Orlando_Anteghini_COMPLETO\27.11\MATLAB\orlandoagua31_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Orlando_Anteghini_COMPLETO\27.11\MATLAB\orlandoagua32_data.txt

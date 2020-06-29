@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,isabellasucralose1454                                                           ,                                                                                ,07.11.19,16.36.11,768     ,                                            ,20,1       ,2

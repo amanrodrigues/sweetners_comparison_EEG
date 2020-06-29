@@ -1,0 +1,114 @@
+Resultados:
+
+    Agua_Açucar:
+    
+    * tunner01:
+        {
+        Modelo: tunner01_agua_acucar_V1.h5
+        Resultado: 77.61904761904762%  64.04761904761905% acerto(acucar e agua)
+        trial: 2f83...
+        best network:
+            Dense_01: 16
+            dropout_1: 0.1
+            Dense_02: 16
+            dropout_2: 0.1
+            Dense_03: 64
+            dropout_3: 0.05
+        }
+     
+     Agua_Sucralose
+     
+     * tunner01:
+     {
+         Modelo: tunner01_acucar_sucralose.h5
+         Resultado: 56.30% 61.54% acerto(agua e sucralose)
+         best network:
+            Dense_01: 48
+            dropout_1: 0.2
+            Dense_02: 64
+            dropout_2: 0.2    
+         Trial ID: e885fc3273e0655a441095ff49dea2d2
+     }
+     
+     Agua_Aspartame
+     
+     * tunner01:
+     {
+         Modelo: tunner01_acucar_aspartame.h5
+         Resultado: 57.13% 63.92% acerto(agua e aspartame)
+         best network:
+            Dense_01: 48
+            dropout_1: 0.2
+            Dense_02: 64
+            dropout_2: 0.2    
+         Trial ID: 001bc3a2df614851d4b3ab8c3d6deded
+     }
+     
+     Açucar_Aspartame
+     
+     * tunner01:
+     {
+         Modelo: 
+         Resultado: 85 84.79% 41.30%
+         best network:
+            Dense_01: 16
+            dropout_1: 0.1
+            Dense_02: 16
+            dropout_2: 0.1
+            Dense_03: 64
+            dropout_3: 0.05
+        }
+        Resultado2: 9 47.96% 83.93%
+        best network:
+            Dense_01: 32
+            dropout_1: 0.2
+            Dense_02: 32
+            dropout_2: 0.2
+            Dense_03: 86
+            dropout_3: 0.05
+        }
+     }
+ 
+     Acucar_Sucralose
+     
+     * tunner01:
+     {
+         Modelo: 
+         Resultado: 42 58.34% 57.26%
+         best network:
+            Dense_01: 32
+            dropout_1: 0.2
+            Dense_02: 32
+            dropout_2: 0.2
+            Dense_03: 86
+            dropout_3: 0.05
+        }
+     * tunner02:
+     {
+         Modelo: 
+         Resultado: 42 68.95% 57.51%
+         best network:
+            Dense_01: 32
+            dropout_1: 0.2
+            Dense_02: 32
+            dropout_2: 0.2
+            Dense_03: 86
+            dropout_3: 0.05
+        }
+     }
+ 
+     Aspartame_Sucralose
+     
+     * tunner01:
+     {
+         Modelo: 
+         Resultado: 98 87.45% 43.10%
+         best network:
+            Dense_01: 32
+            dropout_1: 0.2
+            Dense_02: 32
+            dropout_2: 0.2
+            Dense_03: 86
+            dropout_3: 0.05
+        }
+     }

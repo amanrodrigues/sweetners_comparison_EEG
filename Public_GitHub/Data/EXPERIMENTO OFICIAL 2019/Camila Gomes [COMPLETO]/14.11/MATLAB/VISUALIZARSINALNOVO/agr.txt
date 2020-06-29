@@ -1,0 +1,14 @@
+8
+512
+1024
+4
+100
+
+C:\Users\Thais\Desktop\EEG\0.DADOS\Camila_Gomes\14.11\MATLAB\camila2629_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Camila_Gomes\14.11\MATLAB\camila2691_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Camila_Gomes\14.11\MATLAB\camila5339_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Camila_Gomes\14.11\MATLAB\camila5826_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Camila_Gomes\14.11\MATLAB\camila5877_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Camila_Gomes\14.11\MATLAB\camila8198_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Camila_Gomes\14.11\MATLAB\camilaagua23_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Camila_Gomes\14.11\MATLAB\camilaagua24_data.txt

@@ -1,0 +1,14 @@
+8
+512
+1024
+4
+100
+
+C:\Users\Thais\Desktop\EEG\0. DADOS\Ana Carolina Contreras\14.11\MATLABnovo\anacarolina1380_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Ana Carolina Contreras\14.11\MATLABnovo\anacarolina2410_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Ana Carolina Contreras\14.11\MATLABnovo\anacarolina3714_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Ana Carolina Contreras\14.11\MATLABnovo\anacarolina4318_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Ana Carolina Contreras\14.11\MATLABnovo\anacarolina6873_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Ana Carolina Contreras\14.11\MATLABnovo\anacarolina8798_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Ana Carolina Contreras\14.11\MATLABnovo\anacarolinaagua29_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Ana Carolina Contreras\14.11\MATLABnovo\anacarolinaagua30_data.txt

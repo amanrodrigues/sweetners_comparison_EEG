@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,camilamendes2255                                                                ,                                                                                ,03.12.19,16.15.01,768     ,                                            ,20,1       ,2

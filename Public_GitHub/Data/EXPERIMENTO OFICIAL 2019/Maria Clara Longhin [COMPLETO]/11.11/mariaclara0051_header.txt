@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,mariaclarasucralose0051                                                         ,                                                                                ,11.11.19,19.52.54,768     ,                                            ,20,1       ,2

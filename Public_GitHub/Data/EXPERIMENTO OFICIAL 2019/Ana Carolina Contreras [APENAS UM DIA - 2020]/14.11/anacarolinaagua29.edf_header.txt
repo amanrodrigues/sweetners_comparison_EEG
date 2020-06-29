@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,anaclaraagua                                                                    ,                                                                                ,14.11.19,08.45.13,768     ,                                            ,20,1       ,2

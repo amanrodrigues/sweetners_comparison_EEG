@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,camila2629                                                                      ,                                                                                ,14.11.19,10.08.28,768     ,                                            ,20,1       ,2

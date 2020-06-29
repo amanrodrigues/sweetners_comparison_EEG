@@ -1,0 +1,15 @@
+8
+512
+1024
+4
+100
+
+
+C:\Users\Thais\Desktop\EEG\0. DADOS\Laís Sorrilha\12.11\MATLABnovo\lais0398_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Laís Sorrilha\12.11\MATLABnovo\lais1020_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Laís Sorrilha\12.11\MATLABnovo\lais4990_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Laís Sorrilha\12.11\MATLABnovo\lais5123_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Laís Sorrilha\12.11\MATLABnovo\lais6366_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Laís Sorrilha\12.11\MATLABnovo\lais6522_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Laís Sorrilha\12.11\MATLABnovo\laisagua17_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Laís Sorrilha\12.11\MATLABnovo\laisagua18_data.txt

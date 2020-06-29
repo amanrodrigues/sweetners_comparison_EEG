@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,beatriz4279                                                                     ,                                                                                ,12.11.19,13.16.35,768     ,                                            ,20,1       ,2

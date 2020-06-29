@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,rafaela7658                                                                     ,                                                                                ,14.11.19,09.31.26,768     ,                                            ,20,1       ,2

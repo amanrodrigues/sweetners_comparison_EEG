@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,mariaclara0931                                                                  ,                                                                                ,13.11.19,12.59.45,768     ,                                            ,20,1       ,2

@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,carolinamonicaagua3                                                             ,                                                                                ,07.11.19,17.20.01,768     ,                                            ,19,1       ,2

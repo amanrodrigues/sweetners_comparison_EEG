@@ -1,0 +1,16 @@
+8
+512
+1024
+4
+100
+
+C:\Users\Thais\Desktop\EEG\0.DADOS\_Camila_Ferreira_Mendes_COMPLETO\04.12\MATLABnovo\camilamendes0348_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\_Camila_Ferreira_Mendes_COMPLETO\04.12\MATLABnovo\camilamendes0574_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\_Camila_Ferreira_Mendes_COMPLETO\04.12\MATLABnovo\camilamendes3784_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\_Camila_Ferreira_Mendes_COMPLETO\04.12\MATLABnovo\camilamendes4059_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\_Camila_Ferreira_Mendes_COMPLETO\04.12\MATLABnovo\camilamendes7443_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\_Camila_Ferreira_Mendes_COMPLETO\04.12\MATLABnovo\camilamendes9844_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\_Camila_Ferreira_Mendes_COMPLETO\04.12\MATLABnovo\camilamendesagua55_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\_Camila_Ferreira_Mendes_COMPLETO\04.12\MATLABnovo\camilamendesagua56_data.txt
+
+

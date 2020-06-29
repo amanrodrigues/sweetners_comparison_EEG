@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,carolinamonicaaspartame2217                                                     ,                                                                                ,07.11.19,17.29.13,768     ,                                            ,19,1       ,2

@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,isaperonagua44                                                                  ,                                                                                ,02.12.19,14.04.35,768     ,                                            ,20,1       ,2

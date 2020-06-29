@@ -1,0 +1,15 @@
+8
+512
+1024
+4
+100
+
+
+C:\Users\Thais\Desktop\EEG\0.DADOS\Rafaela_Pereira_Curi_COMPLETO\03.12\MATLABnovo\rafacuri0226_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Rafaela_Pereira_Curi_COMPLETO\03.12\MATLABnovo\rafacuri0441_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Rafaela_Pereira_Curi_COMPLETO\03.12\MATLABnovo\rafacuri4333_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Rafaela_Pereira_Curi_COMPLETO\03.12\MATLABnovo\rafacuri7598_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Rafaela_Pereira_Curi_COMPLETO\03.12\MATLABnovo\rafacuri9214_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Rafaela_Pereira_Curi_COMPLETO\03.12\MATLABnovo\rafacuri9725_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Rafaela_Pereira_Curi_COMPLETO\03.12\MATLABnovo\rafacuriagua45_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Rafaela_Pereira_Curi_COMPLETO\03.12\MATLABnovo\rafacuriagua46_data.txt

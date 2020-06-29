@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,isaperon0554                                                                    ,                                                                                ,03.12.19,15.37.46,768     ,                                            ,20,1       ,2

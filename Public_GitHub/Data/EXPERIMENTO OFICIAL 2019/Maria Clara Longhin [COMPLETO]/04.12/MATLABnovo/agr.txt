@@ -1,0 +1,15 @@
+8
+512
+1024
+4
+100
+
+
+C:\Users\Thais\Desktop\EEG\0.DADOS\Maria_Clara_Langhin_COMPLETO\04.12\MATLABnovo\mariaclara2413_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Maria_Clara_Langhin_COMPLETO\04.12\MATLABnovo\mariaclara4845_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Maria_Clara_Langhin_COMPLETO\04.12\MATLABnovo\mariaclara4941_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Maria_Clara_Langhin_COMPLETO\04.12\MATLABnovo\mariaclara5512_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Maria_Clara_Langhin_COMPLETO\04.12\MATLABnovo\mariaclara8539_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Maria_Clara_Langhin_COMPLETO\04.12\MATLABnovo\mariaclara9081_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Maria_Clara_Langhin_COMPLETO\04.12\MATLABnovo\mariaclaraagua53_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Maria_Clara_Langhin_COMPLETO\04.12\MATLABnovo\mariaclaraagua54_data.txt

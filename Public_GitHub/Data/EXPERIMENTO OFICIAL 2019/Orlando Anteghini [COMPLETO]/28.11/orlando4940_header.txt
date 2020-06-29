@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,orlando4940                                                                     ,                                                                                ,28.11.19,09.35.33,768     ,                                            ,20,1       ,2

@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,carolinamonicaacucar2864                                                        ,                                                                                ,07.11.19,17.23.09,768     ,                                            ,18,1       ,2

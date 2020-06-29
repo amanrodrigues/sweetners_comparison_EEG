@@ -1,0 +1,14 @@
+8
+512
+1024
+4
+100
+
+C:\Users\Thais\Desktop\EEG\0. DADOS\Isabella Vilela [COMPLETO]\07.11\MATLAB\isabella0505_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Isabella Vilela [COMPLETO]\07.11\MATLAB\isabella0834_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Isabella Vilela [COMPLETO]\07.11\MATLAB\isabella1454_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Isabella Vilela [COMPLETO]\07.11\MATLAB\isabella2864_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Isabella Vilela [COMPLETO]\07.11\MATLAB\isabella3575_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Isabella Vilela [COMPLETO]\07.11\MATLAB\isabella4449_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Isabella Vilela [COMPLETO]\07.11\MATLAB\isabellaagua01_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Isabella Vilela [COMPLETO]\07.11\MATLAB\isabellaagua02_data.txt

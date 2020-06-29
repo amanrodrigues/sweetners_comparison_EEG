@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,rafacuri7598                                                                    ,                                                                                ,03.12.19,10.04.22,768     ,                                            ,20,1       ,2

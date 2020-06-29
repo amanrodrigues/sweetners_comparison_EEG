@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,isabellaaspartame3575                                                           ,                                                                                ,07.11.19,16.40.36,768     ,                                            ,19,1       ,2

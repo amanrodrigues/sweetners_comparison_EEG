@@ -1,0 +1,15 @@
+8
+512
+1024
+4
+100
+
+
+C:\Users\Thais\Desktop\EEG\0. DADOS\Rafaela Pereira Curi\14.11\MATLAB\rafaela2535_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Rafaela Pereira Curi\14.11\MATLAB\rafaela2596_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Rafaela Pereira Curi\14.11\MATLAB\rafaela3794_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Rafaela Pereira Curi\14.11\MATLAB\rafaela4191_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Rafaela Pereira Curi\14.11\MATLAB\rafaela6230_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Rafaela Pereira Curi\14.11\MATLAB\rafaela7658_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Rafaela Pereira Curi\14.11\MATLAB\rafaelaagua27_data.txt
+C:\Users\Thais\Desktop\EEG\0. DADOS\Rafaela Pereira Curi\14.11\MATLAB\rafaelaagua28_data.txt

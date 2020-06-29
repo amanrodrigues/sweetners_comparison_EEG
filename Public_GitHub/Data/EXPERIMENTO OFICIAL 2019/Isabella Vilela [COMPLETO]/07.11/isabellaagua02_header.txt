@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,isabellaagua02                                                                  ,                                                                                ,07.11.19,16.31.30,768     ,                                            ,20,1       ,2

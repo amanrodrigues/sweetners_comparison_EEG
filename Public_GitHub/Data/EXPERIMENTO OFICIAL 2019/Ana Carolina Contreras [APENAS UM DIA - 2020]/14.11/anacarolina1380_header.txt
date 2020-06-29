@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,anaclara1380                                                                    ,                                                                                ,14.11.19,08.51.30,768     ,                                            ,20,1       ,2

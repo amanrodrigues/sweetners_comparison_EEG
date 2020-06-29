@@ -1,0 +1,16 @@
+8
+512
+256
+4
+1
+2
+
+
+C:\Users\CCE\Desktop\AnaCarolinaContreras\anacarolina1380.txt
+C:\Users\CCE\Desktop\AnaCarolinaContreras\anacarolina2410.txt
+C:\Users\CCE\Desktop\AnaCarolinaContreras\anacarolina3714.txt
+C:\Users\CCE\Desktop\AnaCarolinaContreras\anacarolina4318.txt
+C:\Users\CCE\Desktop\AnaCarolinaContreras\anacarolina6873.txt
+C:\Users\CCE\Desktop\AnaCarolinaContreras\anacarolina8798.txt
+C:\Users\CCE\Desktop\AnaCarolinaContreras\anacarolina29.txt
+C:\Users\CCE\Desktop\AnaCarolinaContreras\anacarolina30.txt

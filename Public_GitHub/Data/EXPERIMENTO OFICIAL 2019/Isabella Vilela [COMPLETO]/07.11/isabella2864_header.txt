@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,isabellaacucar2864                                                              ,                                                                                ,07.11.19,16.33.38,768     ,                                            ,20,1       ,2

@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,camilamendesagua52                                                              ,                                                                                ,03.12.19,16.09.42,768     ,                                            ,20,1       ,2

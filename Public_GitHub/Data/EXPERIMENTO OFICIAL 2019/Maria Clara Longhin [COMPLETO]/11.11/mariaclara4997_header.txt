@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,mariaclaraaspartame4997                                                         ,                                                                                ,11.11.19,19.56.13,768     ,                                            ,20,1       ,2

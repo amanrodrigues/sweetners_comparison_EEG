@@ -1,0 +1,14 @@
+8
+512
+1024
+4
+100
+
+C:\Users\Thais\Desktop\EEG\DADOS\Beatiz Aya Yokomizo [COMPLETO]\11.11\MATLAB\beatriz0238_data.txt
+C:\Users\Thais\Desktop\EEG\DADOS\Beatiz Aya Yokomizo [COMPLETO]\11.11\MATLAB\beatriz2454_data.txt
+C:\Users\Thais\Desktop\EEG\DADOS\Beatiz Aya Yokomizo [COMPLETO]\11.11\MATLAB\beatriz2823_data.txt
+C:\Users\Thais\Desktop\EEG\DADOS\Beatiz Aya Yokomizo [COMPLETO]\11.11\MATLAB\beatriz3626_data.txt
+C:\Users\Thais\Desktop\EEG\DADOS\Beatiz Aya Yokomizo [COMPLETO]\11.11\MATLAB\beatriz4651_data.txt
+C:\Users\Thais\Desktop\EEG\DADOS\Beatiz Aya Yokomizo [COMPLETO]\11.11\MATLAB\beatriz4974_data.txt
+C:\Users\Thais\Desktop\EEG\DADOS\Beatiz Aya Yokomizo [COMPLETO]\11.11\MATLAB\beatrizagua13_data.txt
+C:\Users\Thais\Desktop\EEG\DADOS\Beatiz Aya Yokomizo [COMPLETO]\11.11\MATLAB\beatrizagua14_data.txt

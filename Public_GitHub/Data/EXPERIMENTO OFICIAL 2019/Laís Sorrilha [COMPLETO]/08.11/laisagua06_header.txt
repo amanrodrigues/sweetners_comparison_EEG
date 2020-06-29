@@ -1,0 +1,2 @@
+Version,Patient,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+0       ,laisagua06                                                                      ,                                                                                ,08.11.19,13.31.22,768     ,                                            ,20,1       ,2

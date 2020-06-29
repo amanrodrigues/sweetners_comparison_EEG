@@ -1,0 +1,14 @@
+8
+512
+1024
+4
+100
+
+C:\Users\Thais\Desktop\EEG\0.DADOS\Isabela_Peron_COMPLETO\03.12\MATLABnovo\isaperon0554_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Isabela_Peron_COMPLETO\03.12\MATLABnovo\isaperon1443_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Isabela_Peron_COMPLETO\03.12\MATLABnovo\isaperon5829_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Isabela_Peron_COMPLETO\03.12\MATLABnovo\isaperon6401_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Isabela_Peron_COMPLETO\03.12\MATLABnovo\isaperon7689_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Isabela_Peron_COMPLETO\03.12\MATLABnovo\isaperon9404_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Isabela_Peron_COMPLETO\03.12\MATLABnovo\isaperonagua49_data.txt
+C:\Users\Thais\Desktop\EEG\0.DADOS\Isabela_Peron_COMPLETO\03.12\MATLABnovo\isaperonagua50_data.txt
