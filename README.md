@@ -1,1 +1,1 @@
-# passion_fruit_EEG
+# sweetners comparison_EEG
