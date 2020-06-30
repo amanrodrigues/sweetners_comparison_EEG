@@ -1,1 +1,1 @@
-# sweetners comparison_EEG
+# sweetners_comparison_EEG
