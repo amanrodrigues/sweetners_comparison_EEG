@@ -130,21 +130,16 @@ def enumera_dicionario(lista_itens):
 
     Parameters
     ----------
-    lista_itens : list
+    lista_itens: list
         Lista com os elementos que serão valores do dicionario.
-        Exemplo1: ['str','str', 'str']
-        Exemplo2: ['int','int','int']
-
+        Exemplo1: ['str','str', 'str'];
+        Exemplo2: ['int','int','int'];
     Returns
     -------
     dicionario
-        Dicionario em que:
-            Chave: sequencia indo de 0 até len(lista_itens)
-            Valor: Elementos da lista, em ordem de posição.
-        Exemplo:
-        enumera_dicionario(['X', 'Y', 'Z'])
-        return: {0:'X', 1:Y', 2:'Z'}
+        Dicionario em que: /n Chave: sequencia indo de 0 até len(lista_itens). /n Valor: Elementos da lista, em ordem de posicao. /n Exemplo: /n enumera_dicionario(['X', 'Y', 'Z']) /n return:{0:'X', 1:Y', 2:'Z'}
     """
+
     dicionario_output = dict()
     for i, j in enumerate(lista_itens):
         dicionario_output[i] = j
@@ -161,13 +156,9 @@ def inverte_enumera_dicionario(lista_itens):
     Returns
     -------
     dicionario
-        Dicionario em que:
-            Chave: Elementos da lista, em ordem de posição.
-            Valor: sequencia indo de 0 até len(lista_itens)
-        Exemplo:
-        inverte_enumera_dicionario(['exemplo1', 'exemplo2', 'exemplo3'])
-        return: {'exemplo1':0, 'exemplo2':1, 'exemplo3':2}
+        Dicionario em que: Chave: Elementos da lista, em ordem de posição e Valor: sequencia indo de 0 até len(lista_itens). /n Exemplo: inverte_enumera_dicionario(['exemplo1', 'exemplo2', 'exemplo3']) /n return: {'exemplo1':0, 'exemplo2':1, 'exemplo3':2}
     """
+
     dicionario_output = dict()
     for i, j in enumerate(lista_itens):
         dicionario_output[j] = i

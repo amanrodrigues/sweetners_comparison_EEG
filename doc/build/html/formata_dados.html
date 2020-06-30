@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>formata_dados module &mdash; sweetners_comparison_EEG  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> sweetners_comparison_EEG
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">formata_dados module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">sweetners_comparison_EEG</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>formata_dados module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/formata_dados.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-formata_dados">
+<span id="formata-dados-module"></span><h1>formata_dados module<a class="headerlink" href="#module-formata_dados" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="formata_dados.arruma_output">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">arruma_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nomes_dos_arquivos_de_dados</span></em>, <em class="sig-param"><span class="n">output</span></em>, <em class="sig-param"><span class="n">acucar</span></em>, <em class="sig-param"><span class="n">agua</span></em>, <em class="sig-param"><span class="n">sucralose</span></em>, <em class="sig-param"><span class="n">aspartame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.arruma_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gera uma lista com a sequencia das bebidas ingeridas em cada experimento</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nomes_dos_arquivos_de_dados</strong> (<em>list</em>) – lista contendo o títuto de cada arquivo</p></li>
+<li><p><strong>output</strong> (<em>dicionario</em>) – dicionario retornado pela funcao cria_dicionario_output()</p></li>
+<li><p><strong>acucar</strong> (<em>int</em>) – valor atribuido a bebida com acucar</p></li>
+<li><p><strong>agua</strong> (<em>int</em>) – valor atribuido a bebida agua</p></li>
+<li><p><strong>sucralose</strong> (<em>int</em>) – valor atribuido a bebida com sucralose</p></li>
+<li><p><strong>aspartame</strong> (<em>int</em>) – valor atribuido a bebida com aspartame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>output_list</strong> (<em>list</em>) – lista sequenciada dos valores referentes às bebidas ingeridas em cada experimento</p></li>
+<li><p><em>invidivuals:: list</em> – lista sequenciada dos individuos referentes a cada experimento</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.calculo_fft">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">calculo_fft</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">frequencia_de_amostragem</span><span class="o">=</span><span class="default_value">512</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.calculo_fft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calcula as amplitudes e frequencias contidas na onda através da transformada de Fourier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dados</strong> (<em>np.array</em>) – vetor de dados relativo a serie temporal de um experimento</p></li>
+<li><p><strong>frequencia_de_amostragem</strong> (<em>int</em><em>, </em><em>optional</em>) – frequencia de amostragem, by default 512</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>fft_Amplitudes</strong> (<em>np.array</em>) – Amplitudes da onda obtidas através da transformada de Fourier</p></li>
+<li><p><strong>fft_Frequencies</strong> (<em>np.array</em>) – Frequencias da onda obtidas através da transformada de Fourier</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.completa_dados">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">completa_dados</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">output</span></em>, <em class="sig-param"><span class="n">dicionario_datas</span></em>, <em class="sig-param"><span class="n">lista_individuos</span></em>, <em class="sig-param"><span class="n">data_experimento</span></em>, <em class="sig-param"><span class="n">index_inicial</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.completa_dados" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insere as referências de outputs nos dados</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dados</strong> (<em>list</em>) – lista de np.arrays contendo os dados do experimento</p></li>
+<li><p><strong>output</strong> (<em>list</em>) – lista de valores referentes a bebida ingerida em cada experimento</p></li>
+<li><p><strong>dicionario_datas</strong> (<em>dicionario</em>) – dicionario no qual chave = dia de realizacao do experimento e valor = int referente ao dia</p></li>
+<li><p><strong>lista_individuos</strong> (<em>lista</em>) – lista sequenciada dos numeros inteiros relativos aos individuos referentes a cada experimento</p></li>
+<li><p><strong>data_experimento</strong> (<em>lista</em>) – lista de str referentes as datas de cada um dos experimentos</p></li>
+<li><p><strong>index_inicial</strong> (<em>int</em><em>, </em><em>optional</em>) – index do dado a ser considerado como ponto de inicio, by default 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>DataFrame contendo os dados originais com seus respectivos dados de output sendo</dt><dd><p>A coluna -1 = individuo
+A coluna -2 = data
+A coluna -3 = output (tipo de bebida)
+A coluna -4 = canal</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.cria_dicionario_output">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">cria_dicionario_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.cria_dicionario_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cria dicionario que vincule o nome do arquivo à bebida ingerida</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dicionario vinculando o codigo da bebida com a bebida</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dicionario</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.enumera_dicionario">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">enumera_dicionario</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista_itens</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.enumera_dicionario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cria dicionario atribuindo o index (int) do elemento na lista como chave e o elemento como valor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lista_itens</strong> (<em>list</em>) – Lista com os elementos que serão valores do dicionario.
+Exemplo1: [‘str’,’str’, ‘str’];
+Exemplo2: [‘int’,’int’,’int’];</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dicionario em que: /n Chave: sequencia indo de 0 até len(lista_itens). /n Valor: Elementos da lista, em ordem de posicao. /n Exemplo: /n enumera_dicionario([‘X’, ‘Y’, ‘Z’]) /n return:{0:’X’, 1:Y’, 2:’Z’}</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dicionario</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.gera_lista_individuos">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">gera_lista_individuos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">individuos</span></em>, <em class="sig-param"><span class="n">camilamendes</span></em>, <em class="sig-param"><span class="n">camila</span></em>, <em class="sig-param"><span class="n">beatriz</span></em>, <em class="sig-param"><span class="n">carolmonica</span></em>, <em class="sig-param"><span class="n">isabella</span></em>, <em class="sig-param"><span class="n">isaperon</span></em>, <em class="sig-param"><span class="n">lais</span></em>, <em class="sig-param"><span class="n">mariaclara</span></em>, <em class="sig-param"><span class="n">orlando</span></em>, <em class="sig-param"><span class="n">rafa</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.gera_lista_individuos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gera uma lista com a sequencia dos voluntarios em cada experimento</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>individuos</strong> (<em>list</em>) – lista sequenciada dos individuos referentes a cada experimento</p></li>
+<li><p><strong>camilamendes</strong> (<em>[</em><em>type</em><em>]</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>camila</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>beatriz</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>carolmonica</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>isabella</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>isaperon</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>lais</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>mariaclara</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>orlando</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+<li><p><strong>rafa</strong> (<em>int</em>) – valor inteiros atribuidos ao individuo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>lista sequenciada dos numeros inteiros relativos aos individuos referentes a cada experimento</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.inverte_enumera_dicionario">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">inverte_enumera_dicionario</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista_itens</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.inverte_enumera_dicionario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cria dicionario atribuindo o index (int) do elemento na lista como valor e o elemento como chave.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lista_itens</strong> (<em>list</em>) – Lista com os elementos que serão chaves do dicionario</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dicionario em que: Chave: Elementos da lista, em ordem de posição e Valor: sequencia indo de 0 até len(lista_itens). /n Exemplo: inverte_enumera_dicionario([‘exemplo1’, ‘exemplo2’, ‘exemplo3’]) /n return: {‘exemplo1’:0, ‘exemplo2’:1, ‘exemplo3’:2}</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dicionario</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.le_dados_EEG">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">le_dados_EEG</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.le_dados_EEG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lê os arquivos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Caminho para a pasta que contem os dados de todos os voluntários.
+Os dados devem estar em dividos em pastas nomeadas pelo dia do experimento no formato “dia.mes”, o nome de cada arquivo deve ser no formato “nomedovoluntario+codigobebida_data.txt e os arquivos devem ter tres colunas de dados (tempo, canal 1 e canal 2)”
+Exemplo: “/sua_pasta/”</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dicionario no qual:
+chave = nome do voluntario+codigo da bebida
+valor = lista com os dados dispostos em 3 colunas: tempo, canal 1 e canal 2</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.padroniza_dados">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">padroniza_dados</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista_dados</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.padroniza_dados" title="Permalink to this definition">¶</a></dt>
+<dd><p>Elimina os títulos das colunas, nos arquivos que possuem título, deixando todos os dados com o mesmo tamanho e formato</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lista_dados</strong> (<em>list</em>) – Lista contendo listas de todos os dados e data do experimento</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>lista_dados_padronizados</strong> (<em>list</em>) – lista contendo np.arrays os dados sem titulo das colunas</p></li>
+<li><p><strong>data_experimento</strong> (<em>list</em>) – lista de str referentes as datas de cada um dos experimentos</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.separa_dados_por_output">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">separa_dados_por_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">dicionario_output</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.separa_dados_por_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Separa os dados por bebida ingerida</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dados</strong> (<em>np.array</em>) – np.array de np.arrays contendo os dados dos experimentos com seus respectivos outputs</p></li>
+<li><p><strong>dicionario_output</strong> (<em>dicionario</em>) – dicionario no qual chave = int e valor = str do tipo de bebida referente ao int</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dicionario contendo os dados separados por bebida</dt><dd><p>chave = bebida
+valor = np.array contendo os np.arrays referentes aos dados correspondentes a bebida chave</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dicionario</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.valida_dados">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">valida_dados</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados_numpy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.valida_dados" title="Permalink to this definition">¶</a></dt>
+<dd><p>Avalia se a maior parte das frequencias da série está em um intervalo esperado para sinal cerebral</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dados_numpy</strong> (<em>np.array</em>) – np.array de np.arrays contendo os dados temporais (não devem ser incluidos os outputs)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>ok</strong> (<em>list</em>) – listas contendo os indices dos vetores de dados considerados corretos através da análise de frequencias obtidas através da transformada de Fourier</p></li>
+<li><p><strong>errado</strong> (<em>list</em>) – listas contendo os indices dos vetores de dados considerados errados através da análise de frequencias obtidas através da transformada de Fourier</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="formata_dados.valida_sinal_eeg">
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">valida_sinal_eeg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados_array</span></em>, <em class="sig-param"><span class="n">lim</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">freq_corte_1</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="n">freq_corte_2</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">freq_corte_3</span><span class="o">=</span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.valida_sinal_eeg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Avalia se um dado tem formato de EEG para facilitar a remoção dos dados com ruido. É considerado sinal de EEG o dado em que a maior parte das frequencias esteja entre freq_corte_1 e freq_corte_2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dados_array</strong> (<em>np.array</em>) – array contendo um vetor de dados referente a serie temporal monitorada</p></li>
+<li><p><strong>lim</strong> (<em>float</em><em>, </em><em>optional</em>) – [description], by default 0.1</p></li>
+<li><p><strong>freq_corte_1</strong> (<em>int</em><em>, </em><em>optional</em>) – Frequencia de corte 1 (Hz), by default 15</p></li>
+<li><p><strong>freq_corte_2</strong> (<em>int</em><em>, </em><em>optional</em>) – Frequencia de corte 2 (Hz), by default 50</p></li>
+<li><p><strong>freq_corte_3</strong> (<em>int</em><em>, </em><em>optional</em>) – Frequencia de corte 3 (Hz), by default 100</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>str</em> – avaliação obtida através do resultado</p></li>
+<li><p><em>list</em> – dados separados em 3 arrays: o primeiro com os dados até o primeiro corte, o segundo com os dados entre o primeiro e o segundo corte e o terceiro com os dados após o terceiro corte</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gustavo Voltani von Atzingen, Amanda Rodrigues da Silva
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
