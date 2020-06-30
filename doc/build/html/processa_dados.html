@@ -26,16 +26,17 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="formata_dados module" href="formata_dados.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,11 +81,12 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">processa_dados module</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="formata_dados.html">formata_dados module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">processa_dados module</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -150,9 +152,9 @@
             
   <div class="section" id="module-processa_dados">
 <span id="processa-dados-module"></span><h1>processa_dados module<a class="headerlink" href="#module-processa_dados" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
+<dl class="function">
 <dt id="processa_dados.arredonda_predicao">
-<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">arredonda_predicao</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">valor</span></em>, <em class="sig-param"><span class="n">limite</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="headerlink" href="#processa_dados.arredonda_predicao" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">arredonda_predicao</code><span class="sig-paren">(</span><em class="sig-param">valor</em>, <em class="sig-param">limite=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processa_dados.html#arredonda_predicao"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#processa_dados.arredonda_predicao" title="Permalink to this definition">¶</a></dt>
 <dd><p>Arredonda o valor decimal da predicao para 0 ou 1 a partir de um limite</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -170,9 +172,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="processa_dados.calc_preds">
-<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">calc_preds</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lim</span></em>, <em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#processa_dados.calc_preds" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">calc_preds</code><span class="sig-paren">(</span><em class="sig-param">lim</em>, <em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processa_dados.html#calc_preds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#processa_dados.calc_preds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calcula a porcentagem de acerto do modelo</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -192,9 +194,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="processa_dados.converte_dados_buckets_fft">
-<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">converte_dados_buckets_fft</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">n_buckets</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span><a class="headerlink" href="#processa_dados.converte_dados_buckets_fft" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">converte_dados_buckets_fft</code><span class="sig-paren">(</span><em class="sig-param">dados</em>, <em class="sig-param">n_buckets=20</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processa_dados.html#converte_dados_buckets_fft"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#processa_dados.converte_dados_buckets_fft" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retorna os buckets referentes a serie fft particionada</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -212,9 +214,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="processa_dados.multiplica_dados">
-<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">multiplica_dados</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados_numpy_ok</span></em>, <em class="sig-param"><span class="n">tempo_inicial</span></em>, <em class="sig-param"><span class="n">tempo_final</span></em>, <em class="sig-param"><span class="n">frequencia_amostragem</span></em>, <em class="sig-param"><span class="n">janela_tempo</span></em>, <em class="sig-param"><span class="n">tempo_passo</span></em>, <em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="headerlink" href="#processa_dados.multiplica_dados" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">multiplica_dados</code><span class="sig-paren">(</span><em class="sig-param">dados_numpy_ok</em>, <em class="sig-param">tempo_inicial</em>, <em class="sig-param">tempo_final</em>, <em class="sig-param">frequencia_amostragem</em>, <em class="sig-param">janela_tempo</em>, <em class="sig-param">tempo_passo</em>, <em class="sig-param">output</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processa_dados.html#multiplica_dados"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#processa_dados.multiplica_dados" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multiplica os dados gerando janelas de tempo menores a partir do vetor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -238,9 +240,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="processa_dados.remove_ruidos">
-<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">remove_ruidos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">drop_value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#processa_dados.remove_ruidos" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">remove_ruidos</code><span class="sig-paren">(</span><em class="sig-param">dados</em>, <em class="sig-param">drop_value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processa_dados.html#remove_ruidos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#processa_dados.remove_ruidos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove as amplitudes consideradas ruídos em uma onda inserindo
 i) o primeiro valor menor do que o de corte em [0] se o item [0] ultrapassar o limite
 ii) o valor anterior em [n] se [n] ultrapassar o limite</p>
@@ -260,9 +262,9 @@ ii) o valor anterior em [n] se [n] ultrapassar o limite</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="processa_dados.retorna_buckets">
-<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">retorna_buckets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fft_amps</span></em>, <em class="sig-param"><span class="n">fft_freqs</span></em>, <em class="sig-param"><span class="n">n_buckets</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">freq_min</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">freq_max</span><span class="o">=</span><span class="default_value">40</span></em><span class="sig-paren">)</span><a class="headerlink" href="#processa_dados.retorna_buckets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">retorna_buckets</code><span class="sig-paren">(</span><em class="sig-param">fft_amps</em>, <em class="sig-param">fft_freqs</em>, <em class="sig-param">n_buckets=20</em>, <em class="sig-param">freq_min=8</em>, <em class="sig-param">freq_max=40</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processa_dados.html#retorna_buckets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#processa_dados.retorna_buckets" title="Permalink to this definition">¶</a></dt>
 <dd><p>get one fft series and cut it in n_buckets, starting at freq_min and ending at freq_max</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -283,9 +285,9 @@ ii) o valor anterior em [n] se [n] ultrapassar o limite</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="processa_dados.subconjunto_dados">
-<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">subconjunto_dados</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">t_min</span></em>, <em class="sig-param"><span class="n">t_max</span></em>, <em class="sig-param"><span class="n">t_total</span><span class="o">=</span><span class="default_value">18.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#processa_dados.subconjunto_dados" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">subconjunto_dados</code><span class="sig-paren">(</span><em class="sig-param">dados</em>, <em class="sig-param">t_min</em>, <em class="sig-param">t_max</em>, <em class="sig-param">t_total=18.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processa_dados.html#subconjunto_dados"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#processa_dados.subconjunto_dados" title="Permalink to this definition">¶</a></dt>
 <dd><p>seleciona os dados referente a um intervalo de tempo determinado</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -305,9 +307,9 @@ ii) o valor anterior em [n] se [n] ultrapassar o limite</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="processa_dados.tempo_em_indice">
-<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">tempo_em_indice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">array_parcial</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">t_min</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">t_max</span><span class="o">=</span><span class="default_value">18.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#processa_dados.tempo_em_indice" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">processa_dados.</code><code class="sig-name descname">tempo_em_indice</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">array_parcial=False</em>, <em class="sig-param">t_min=0.0</em>, <em class="sig-param">t_max=18.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processa_dados.html#tempo_em_indice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#processa_dados.tempo_em_indice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converte um tempo (s) dado no valor do index correspondente a este tempo no vetor de dados</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -334,6 +336,13 @@ ii) o valor anterior em [n] se [n] ultrapassar o limite</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="formata_dados.html" class="btn btn-neutral float-left" title="formata_dados module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

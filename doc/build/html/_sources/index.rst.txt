@@ -6,12 +6,20 @@
 Welcome to sweetners_comparison_EEG's documentation!
 ====================================================
 
-: automodule:: sweetners_comparison_EEG.formata_dados
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
 
+   formata_dados
+   processa_dados
+
+
+Notebooks
+======================
+.. raw:: html
+
+    <iframe src="_static/Classificador.html" height="645px" width="100%"></iframe>
 
 
 Indices and tables

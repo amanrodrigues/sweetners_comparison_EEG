@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>formata_dados &mdash; sweetners_comparison_EEG  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> sweetners_comparison_EEG
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../formata_dados.html">formata_dados module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../processa_dados.html">processa_dados module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sweetners_comparison_EEG</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>formata_dados</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for formata_dados</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.fftpack</span> <span class="k">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftfreq</span>
+<span class="kn">from</span> <span class="nn">processa_dados</span> <span class="k">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="le_dados_EEG"><a class="viewcode-back" href="../formata_dados.html#formata_dados.le_dados_EEG">[docs]</a><span class="k">def</span> <span class="nf">le_dados_EEG</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Lê os arquivos</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : str</span>
+<span class="sd">        Caminho para a pasta que contem os dados de todos os voluntários.</span>
+<span class="sd">        Os dados devem estar em dividos em pastas nomeadas pelo dia do experimento no formato &quot;dia.mes&quot;, o nome de cada arquivo deve ser no formato &quot;nomedovoluntario+codigobebida_data.txt e os arquivos devem ter tres colunas de dados (tempo, canal 1 e canal 2)&quot;</span>
+<span class="sd">        Exemplo: &quot;/sua_pasta/&quot;</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dicionario no qual:</span>
+<span class="sd">        chave = nome do voluntario+codigo da bebida</span>
+<span class="sd">        valor = lista com os dados dispostos em 3 colunas: tempo, canal 1 e canal 2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">voluntarios</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">voluntarios_completos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">bebidas</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">voluntario</span> <span class="ow">in</span> <span class="n">voluntarios</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;COMPLETO&quot;</span> <span class="ow">in</span> <span class="n">voluntario</span><span class="p">:</span>
+            <span class="n">voluntarios_completos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">voluntario</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">for</span> <span class="n">indice</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">voluntarios_completos</span><span class="p">)):</span>
+        <span class="n">dias_experimento</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">voluntarios_completos</span><span class="p">[</span><span class="n">indice</span><span class="p">])</span>
+        <span class="n">dia_experimento</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">dia</span> <span class="ow">in</span> <span class="n">dias_experimento</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;.1&quot;</span> <span class="ow">in</span> <span class="n">dia</span><span class="p">:</span>
+                <span class="n">dia_experimento</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dia</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">for</span> <span class="n">dia</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dia_experimento</span><span class="p">)):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">arquivos_dados</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">voluntarios_completos</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">dia_experimento</span><span class="p">[</span><span class="n">dia</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/MATLAB&quot;</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">arquivos_dados</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">voluntarios_completos</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">dia_experimento</span><span class="p">[</span><span class="n">dia</span><span class="p">])</span>
+            <span class="n">lista_arquivos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">arquivo</span> <span class="ow">in</span> <span class="n">arquivos_dados</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;data.txt&quot;</span> <span class="ow">in</span> <span class="n">arquivo</span><span class="p">:</span>
+                    <span class="n">lista_arquivos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">pass</span>
+            <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lista_arquivos</span><span class="p">)):</span>
+                <span class="k">try</span><span class="p">:</span>            
+                    <span class="n">arruma_titulo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">voluntarios_completos</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">dia_experimento</span><span class="p">[</span><span class="n">dia</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/MATLAB/&quot;</span><span class="o">+</span><span class="n">lista_arquivos</span><span class="p">[</span><span class="n">elemento</span><span class="p">],</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="n">arruma_titulo</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">]</span>
+                    <span class="n">bebidas</span><span class="p">[</span><span class="n">lista_arquivos</span><span class="p">[</span><span class="n">elemento</span><span class="p">][:</span><span class="o">-</span><span class="mi">9</span><span class="p">]]</span><span class="o">=</span><span class="nb">list</span><span class="p">([</span><span class="n">arruma_titulo</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">dia_experimento</span><span class="p">[</span><span class="n">dia</span><span class="p">])])</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">arruma_titulo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">voluntarios_completos</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">dia_experimento</span><span class="p">[</span><span class="n">dia</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">lista_arquivos</span><span class="p">[</span><span class="n">elemento</span><span class="p">],</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="n">arruma_titulo</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">]</span>
+                    <span class="n">bebidas</span><span class="p">[</span><span class="n">lista_arquivos</span><span class="p">[</span><span class="n">elemento</span><span class="p">][:</span><span class="o">-</span><span class="mi">9</span><span class="p">]]</span><span class="o">=</span><span class="nb">list</span><span class="p">([</span><span class="n">arruma_titulo</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">dia_experimento</span><span class="p">[</span><span class="n">dia</span><span class="p">])],)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">bebidas</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="cria_dicionario_output"><a class="viewcode-back" href="../formata_dados.html#formata_dados.cria_dicionario_output">[docs]</a><span class="k">def</span> <span class="nf">cria_dicionario_output</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Cria dicionario que vincule o nome do arquivo à bebida ingerida</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dicionario</span>
+<span class="sd">        Dicionario vinculando o codigo da bebida com a bebida</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dicionario_agua</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">69</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">dicionario_agua</span><span class="p">[</span><span class="s2">&quot;gua3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;agua&quot;</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">dicionario_agua</span><span class="p">[</span><span class="s2">&quot;gua4&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;agua&quot;</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;ua0&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">dicionario_agua</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;agua&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;ua&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">dicionario_agua</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;agua&quot;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;9180&quot;</span><span class="p">:</span><span class="s2">&quot;açúcar&quot;</span><span class="p">,</span><span class="s2">&quot;7145&quot;</span><span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;4829&quot;</span><span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;6057&quot;</span><span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;3715&quot;</span><span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;2050&quot;</span><span class="p">:</span><span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;4940&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;1914&quot;</span> <span class="p">:</span><span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;7885&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0280&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;4604&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;3762&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;5591&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;2766&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;0594&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;9592&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;7862&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1732&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;ua31&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua32&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;ua33&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua34&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span><span class="s2">&quot;ua37&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua38&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua41&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua42&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;5798&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;5028&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;7702&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0628&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;1085&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;1418&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;ua51&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua52&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;9961&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;1628&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> 
+          <span class="s2">&quot;1429&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;7664&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2255&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;2514&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ua55&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua56&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;0348&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;9844&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;4059&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;0574&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;7443&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;3784&quot;</span> <span class="p">:</span><span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;ua5&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span> <span class="s2">&quot;ua6&quot;</span><span class="p">:</span><span class="s2">&quot;agua&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;9922&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;4435&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;5675&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;4613&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;9636&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;6740&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;9922&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;4435&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;5675&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;4613&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;9636&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;6740&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1020&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;6522&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;0398&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;6366&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;5123&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;4990&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;5605&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;1656&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;7961&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;8140&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;5847&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;0558&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;8596&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;6456&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;4492&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0051&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;7290&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;4997&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;0379&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;0931&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;6827&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;7268&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;5210&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;6013&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;9081&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;4941&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;8539&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2413&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;5512&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;4845&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;3190&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;2491&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;1035&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;9711&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2084&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;8897&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;5759&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;1843&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;7897&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0700&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0383&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;0311&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;6211&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;5227&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;0659&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;6056&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;9285&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1232&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;2686&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;6065&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;3331&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0571&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;6305&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;7935&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1015&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;0633&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;2050&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0344&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;8359&quot;</span>  <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1803&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1443&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;7689&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;0554&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;9404&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;5829&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;6401&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;8198&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;5826&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;5339&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2691&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;5877&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;2629&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;0947&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;1786&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;6048&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0574&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1190&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;3499&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;3070&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;2246&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;4131&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;9344&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;4295&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;4449&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;2864&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;1454&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;0834&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;0505&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;3575&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;2049&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;1887&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;2021&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;0059&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2007&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1629&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;4549&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;7171&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;6876&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;6570&quot;</span>  <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;7229&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;8883&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;7684&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;5241&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;9197&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;9676&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2217&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;5781&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;7687&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;9503&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;7603&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;7924&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2326&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;2254&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;2909&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;2291&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;0398&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;3265&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;0512&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;0216&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;3794&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;6230&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;2535&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;4191&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2596&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;7658&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;4333&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;9214&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;0226&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;7598&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;9725&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;0441&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;1877&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;7900&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;1152&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;3504&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;9329&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;8815&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;7336&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;3872&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;5437&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;8600&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;4592&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;8182&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;3626&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;4974&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;0238&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;2823&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;4651&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;2454&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;8604&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;4573&quot;</span> <span class="p">:</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">,</span> <span class="s2">&quot;6889&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;4279&quot;</span> <span class="p">:</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">,</span> <span class="s2">&quot;9186&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">,</span> <span class="s2">&quot;6225&quot;</span> <span class="p">:</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">}</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dicionario_agua</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span></div>
+
+<div class="viewcode-block" id="enumera_dicionario"><a class="viewcode-back" href="../formata_dados.html#formata_dados.enumera_dicionario">[docs]</a><span class="k">def</span> <span class="nf">enumera_dicionario</span><span class="p">(</span><span class="n">lista_itens</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cria dicionario atribuindo o index (int) do elemento na lista como chave e o elemento como valor.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lista_itens: list</span>
+<span class="sd">        Lista com os elementos que serão valores do dicionario.</span>
+<span class="sd">        Exemplo1: [&#39;str&#39;,&#39;str&#39;, &#39;str&#39;];</span>
+<span class="sd">        Exemplo2: [&#39;int&#39;,&#39;int&#39;,&#39;int&#39;];</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dicionario</span>
+<span class="sd">        Dicionario em que: /n Chave: sequencia indo de 0 até len(lista_itens). /n Valor: Elementos da lista, em ordem de posicao. /n Exemplo: /n enumera_dicionario([&#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;]) /n return:{0:&#39;X&#39;, 1:Y&#39;, 2:&#39;Z&#39;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dicionario_output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lista_itens</span><span class="p">):</span>
+        <span class="n">dicionario_output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+    <span class="k">return</span> <span class="n">dicionario_output</span></div>
+
+<div class="viewcode-block" id="inverte_enumera_dicionario"><a class="viewcode-back" href="../formata_dados.html#formata_dados.inverte_enumera_dicionario">[docs]</a><span class="k">def</span> <span class="nf">inverte_enumera_dicionario</span><span class="p">(</span><span class="n">lista_itens</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cria dicionario atribuindo o index (int) do elemento na lista como valor e o elemento como chave.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lista_itens : list</span>
+<span class="sd">        Lista com os elementos que serão chaves do dicionario</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dicionario</span>
+<span class="sd">        Dicionario em que: Chave: Elementos da lista, em ordem de posição e Valor: sequencia indo de 0 até len(lista_itens). /n Exemplo: inverte_enumera_dicionario([&#39;exemplo1&#39;, &#39;exemplo2&#39;, &#39;exemplo3&#39;]) /n return: {&#39;exemplo1&#39;:0, &#39;exemplo2&#39;:1, &#39;exemplo3&#39;:2}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dicionario_output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lista_itens</span><span class="p">):</span>
+        <span class="n">dicionario_output</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">dicionario_output</span></div>
+
+<div class="viewcode-block" id="arruma_output"><a class="viewcode-back" href="../formata_dados.html#formata_dados.arruma_output">[docs]</a><span class="k">def</span> <span class="nf">arruma_output</span><span class="p">(</span><span class="n">nomes_dos_arquivos_de_dados</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">acucar</span><span class="p">,</span> <span class="n">agua</span><span class="p">,</span> <span class="n">sucralose</span><span class="p">,</span> <span class="n">aspartame</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gera uma lista com a sequencia das bebidas ingeridas em cada experimento</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    nomes_dos_arquivos_de_dados : list</span>
+<span class="sd">        lista contendo o títuto de cada arquivo</span>
+<span class="sd">    output : dicionario</span>
+<span class="sd">        dicionario retornado pela funcao cria_dicionario_output()</span>
+<span class="sd">    acucar : int</span>
+<span class="sd">        valor atribuido a bebida com acucar</span>
+<span class="sd">    agua : int</span>
+<span class="sd">        valor atribuido a bebida agua</span>
+<span class="sd">    sucralose : int</span>
+<span class="sd">        valor atribuido a bebida com sucralose</span>
+<span class="sd">    aspartame : int</span>
+<span class="sd">        valor atribuido a bebida com aspartame</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    output_list : list</span>
+<span class="sd">        lista sequenciada dos valores referentes às bebidas ingeridas em cada experimento</span>
+<span class="sd">    invidivuals:: list</span>
+<span class="sd">        lista sequenciada dos individuos referentes a cada experimento</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">output_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">individuals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">nomes_dos_arquivos_de_dados</span><span class="p">:</span>
+        <span class="n">individuals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]]</span> <span class="o">==</span> <span class="s2">&quot;açúcar&quot;</span><span class="p">:</span>
+            <span class="n">output_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acucar</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]]</span> <span class="o">==</span> <span class="s2">&quot;agua&quot;</span><span class="p">:</span>
+            <span class="n">output_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agua</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]]</span> <span class="o">==</span> <span class="s2">&quot;sucralose&quot;</span><span class="p">:</span>
+            <span class="n">output_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sucralose</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]]</span> <span class="o">==</span> <span class="s2">&quot;aspartame&quot;</span><span class="p">:</span>
+            <span class="n">output_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aspartame</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">output_list</span><span class="p">,</span> <span class="n">individuals</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="padroniza_dados"><a class="viewcode-back" href="../formata_dados.html#formata_dados.padroniza_dados">[docs]</a><span class="k">def</span> <span class="nf">padroniza_dados</span><span class="p">(</span><span class="n">lista_dados</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Elimina os títulos das colunas, nos arquivos que possuem título, deixando todos os dados com o mesmo tamanho e formato</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lista_dados : list</span>
+<span class="sd">        Lista contendo listas de todos os dados e data do experimento</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    lista_dados_padronizados : list</span>
+<span class="sd">        lista contendo np.arrays os dados sem titulo das colunas</span>
+<span class="sd">    data_experimento : list</span>
+<span class="sd">        lista de str referentes as datas de cada um dos experimentos</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lista_dados_padronizados</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">data_experimento</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">dados_erro</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lista_dados</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lista_dados</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])[:</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;Time&quot;</span><span class="p">:</span>
+            <span class="n">lista_dados_padronizados</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lista_dados</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]))[</span><span class="mi">1</span><span class="p">:</span><span class="mi">9217</span><span class="p">])</span>
+            <span class="n">data_experimento</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lista_dados</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lista_dados_padronizados</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lista_dados</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]))[:</span><span class="mi">9216</span><span class="p">])</span>
+            <span class="n">data_experimento</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lista_dados</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lista_dados_padronizados</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">lista_dados_padronizados</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;Time&quot;</span><span class="p">:</span>
+            <span class="n">dados_erro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lista_dados_padronizados</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">9216</span><span class="p">:</span>
+            <span class="n">dados_erro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dados_erro</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Os dados foram padronizados&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Erro, os seguintes dados:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">dados_erro</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;estão com problemas&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lista_dados_padronizados</span><span class="p">,</span> <span class="n">data_experimento</span></div>
+
+<div class="viewcode-block" id="gera_lista_individuos"><a class="viewcode-back" href="../formata_dados.html#formata_dados.gera_lista_individuos">[docs]</a><span class="k">def</span> <span class="nf">gera_lista_individuos</span><span class="p">(</span><span class="n">individuos</span><span class="p">,</span> <span class="n">camilamendes</span><span class="p">,</span> <span class="n">camila</span><span class="p">,</span> <span class="n">beatriz</span><span class="p">,</span> <span class="n">carolmonica</span><span class="p">,</span> <span class="n">isabella</span><span class="p">,</span> <span class="n">isaperon</span><span class="p">,</span> <span class="n">lais</span><span class="p">,</span> <span class="n">mariaclara</span><span class="p">,</span> <span class="n">orlando</span><span class="p">,</span> <span class="n">rafa</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gera uma lista com a sequencia dos voluntarios em cada experimento</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    individuos : list</span>
+<span class="sd">        lista sequenciada dos individuos referentes a cada experimento</span>
+<span class="sd">    camilamendes : [type]</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    camila : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    beatriz : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    carolmonica : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    isabella : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    isaperon : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    lais : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    mariaclara : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    orlando : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+<span class="sd">    rafa : int</span>
+<span class="sd">        valor inteiros atribuidos ao individuo</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        lista sequenciada dos numeros inteiros relativos aos individuos referentes a cada experimento</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">lista_de_individuos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">individuo</span> <span class="ow">in</span> <span class="n">individuos</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;camilamendes&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">camilamendes</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;camila&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">camila</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;beatriz&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">beatriz</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;carolmonica&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">carolmonica</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;isabella&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">isabella</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;isaperon&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">isaperon</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;lais&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lais</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;mariaclara&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mariaclara</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;orlando&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orlando</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;rafa&quot;</span> <span class="ow">in</span> <span class="n">individuo</span><span class="p">:</span>
+            <span class="n">lista_de_individuos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rafa</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;erro&quot;</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">lista_de_individuos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="valida_dados"><a class="viewcode-back" href="../formata_dados.html#formata_dados.valida_dados">[docs]</a><span class="k">def</span> <span class="nf">valida_dados</span><span class="p">(</span><span class="n">dados_numpy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Avalia se a maior parte das frequencias da série está em um intervalo esperado para sinal cerebral</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados_numpy : np.array</span>
+<span class="sd">        np.array de np.arrays contendo os dados temporais (não devem ser incluidos os outputs)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ok : list</span>
+<span class="sd">        listas contendo os indices dos vetores de dados considerados corretos através da análise de frequencias obtidas através da transformada de Fourier</span>
+<span class="sd">    errado : list</span>
+<span class="sd">        listas contendo os indices dos vetores de dados considerados errados através da análise de frequencias obtidas através da transformada de Fourier</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">errado</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dados_numpy</span><span class="p">))):</span>
+        <span class="n">X</span><span class="o">=</span><span class="n">dados_numpy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">qualidade</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">valida_sinal_eeg</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">qualidade</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>
+            <span class="n">ok</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">qualidade</span> <span class="o">==</span> <span class="s2">&quot;errado&quot;</span><span class="p">:</span>
+            <span class="n">errado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;erro&quot;</span><span class="p">)</span> <span class="c1">#teste para ver se algum dados está sem classificação</span>
+    <span class="k">return</span> <span class="n">ok</span><span class="p">,</span> <span class="n">errado</span></div>
+
+<div class="viewcode-block" id="calculo_fft"><a class="viewcode-back" href="../formata_dados.html#formata_dados.calculo_fft">[docs]</a><span class="k">def</span> <span class="nf">calculo_fft</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span> <span class="n">frequencia_de_amostragem</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calcula as amplitudes e frequencias contidas na onda através da transformada de Fourier</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados : np.array</span>
+<span class="sd">        vetor de dados relativo a serie temporal de um experimento</span>
+<span class="sd">    frequencia_de_amostragem : int, optional</span>
+<span class="sd">        frequencia de amostragem, by default 512</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fft_Amplitudes : np.array</span>
+<span class="sd">        Amplitudes da onda obtidas através da transformada de Fourier</span>
+<span class="sd">    fft_Frequencies: np.array</span>
+<span class="sd">        Frequencias da onda obtidas através da transformada de Fourier</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft</span><span class="p">(</span><span class="n">dados</span><span class="p">))</span>
+    <span class="n">freqs</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">*</span><span class="n">frequencia_de_amostragem</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)],</span> <span class="n">freqs</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">freqs</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span></div>
+
+
+
+<div class="viewcode-block" id="valida_sinal_eeg"><a class="viewcode-back" href="../formata_dados.html#formata_dados.valida_sinal_eeg">[docs]</a><span class="k">def</span> <span class="nf">valida_sinal_eeg</span><span class="p">(</span><span class="n">dados_array</span><span class="p">,</span> <span class="n">lim</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">freq_corte_1</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">freq_corte_2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">freq_corte_3</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Avalia se um dado tem formato de EEG para facilitar a remoção dos dados com ruido. É considerado sinal de EEG o dado em que a maior parte das frequencias esteja entre freq_corte_1 e freq_corte_2.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados_array : np.array</span>
+<span class="sd">        array contendo um vetor de dados referente a serie temporal monitorada</span>
+<span class="sd">    lim : float, optional</span>
+<span class="sd">        [description], by default 0.1</span>
+<span class="sd">    freq_corte_1 : int, optional</span>
+<span class="sd">        Frequencia de corte 1 (Hz), by default 15</span>
+<span class="sd">    freq_corte_2 : int, optional</span>
+<span class="sd">        Frequencia de corte 2 (Hz), by default 50</span>
+<span class="sd">    freq_corte_3 : int, optional</span>
+<span class="sd">        Frequencia de corte 3 (Hz), by default 100</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        avaliação obtida através do resultado</span>
+<span class="sd">    list</span>
+<span class="sd">        dados separados em 3 arrays: o primeiro com os dados até o primeiro corte, o segundo com os dados entre o primeiro e o segundo corte e o terceiro com os dados após o terceiro corte</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">amplitude</span><span class="p">,</span> <span class="n">frequencia_fft</span> <span class="o">=</span> <span class="n">calculo_fft</span><span class="p">(</span><span class="n">dados_array</span><span class="p">)</span>
+    <span class="n">normalizado</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">amplitude</span><span class="p">)</span>
+    <span class="n">amplitude</span> <span class="o">=</span> <span class="n">amplitude</span><span class="o">/</span><span class="n">normalizado</span>
+    <span class="n">freq_corte_1_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">frequencia_fft</span> <span class="o">&gt;</span> <span class="n">freq_corte_1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">freq_corte_2_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">frequencia_fft</span> <span class="o">&gt;</span> <span class="n">freq_corte_2</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dados_ate_corte_1</span> <span class="o">=</span> <span class="n">amplitude</span><span class="p">[:</span><span class="n">freq_corte_1_index</span><span class="p">]</span>
+    <span class="n">dados_entre_corte_1_e_2</span> <span class="o">=</span> <span class="n">amplitude</span><span class="p">[</span><span class="n">freq_corte_1_index</span><span class="p">:</span><span class="n">freq_corte_2_index</span><span class="p">]</span>
+    <span class="n">dados_a_partir_do_corte_2</span> <span class="o">=</span> <span class="n">amplitude</span><span class="p">[</span><span class="n">freq_corte_2_index</span><span class="p">:]</span>
+    <span class="n">dados_ate_corte_1</span> <span class="o">=</span> <span class="n">dados_ate_corte_1</span><span class="p">[</span><span class="n">dados_ate_corte_1</span><span class="o">&gt;</span><span class="n">lim</span><span class="p">]</span> 
+    <span class="n">dados_entre_corte_1_e_2</span> <span class="o">=</span> <span class="n">dados_entre_corte_1_e_2</span><span class="p">[</span><span class="n">dados_entre_corte_1_e_2</span><span class="o">&gt;</span><span class="n">lim</span><span class="p">]</span> 
+    <span class="n">dados_a_partir_do_corte_2</span> <span class="o">=</span> <span class="n">dados_a_partir_do_corte_2</span><span class="p">[</span><span class="n">dados_a_partir_do_corte_2</span><span class="o">&gt;</span><span class="n">lim</span><span class="p">]</span>      
+    <span class="n">dados_ate_corte_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dados_ate_corte_1</span><span class="p">)</span>
+    <span class="n">dados_entre_corte_1_e_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dados_entre_corte_1_e_2</span><span class="p">)</span>
+    <span class="n">dados_a_partir_do_corte_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dados_a_partir_do_corte_2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dados_ate_corte_1</span> <span class="o">&gt;</span> <span class="n">dados_entre_corte_1_e_2</span> <span class="ow">and</span> <span class="n">dados_ate_corte_1</span> <span class="o">&gt;</span> <span class="n">dados_a_partir_do_corte_2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;errado&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">dados_ate_corte_1</span><span class="p">,</span> <span class="n">dados_entre_corte_1_e_2</span><span class="p">,</span> <span class="n">dados_a_partir_do_corte_2</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">dados_entre_corte_1_e_2</span> <span class="o">&gt;</span> <span class="n">dados_ate_corte_1</span> <span class="ow">and</span> <span class="n">dados_entre_corte_1_e_2</span> <span class="o">&gt;</span> <span class="n">dados_a_partir_do_corte_2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;OK&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">dados_ate_corte_1</span><span class="p">,</span> <span class="n">dados_entre_corte_1_e_2</span><span class="p">,</span> <span class="n">dados_a_partir_do_corte_2</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">dados_ate_corte_1</span><span class="p">,</span> <span class="n">dados_entre_corte_1_e_2</span><span class="p">,</span> <span class="n">dados_a_partir_do_corte_2</span><span class="p">]</span></div>
+        
+
+<div class="viewcode-block" id="completa_dados"><a class="viewcode-back" href="../formata_dados.html#formata_dados.completa_dados">[docs]</a><span class="k">def</span> <span class="nf">completa_dados</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">dicionario_datas</span><span class="p">,</span> <span class="n">lista_individuos</span><span class="p">,</span> <span class="n">data_experimento</span><span class="p">,</span> <span class="n">index_inicial</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Insere as referências de outputs nos dados</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados : list</span>
+<span class="sd">       lista de np.arrays contendo os dados do experimento</span>
+<span class="sd">    output : list</span>
+<span class="sd">        lista de valores referentes a bebida ingerida em cada experimento</span>
+<span class="sd">    dicionario_datas : dicionario</span>
+<span class="sd">        dicionario no qual chave = dia de realizacao do experimento e valor = int referente ao dia</span>
+<span class="sd">    lista_individuos : lista</span>
+<span class="sd">        lista sequenciada dos numeros inteiros relativos aos individuos referentes a cada experimento</span>
+<span class="sd">    data_experimento : lista</span>
+<span class="sd">        lista de str referentes as datas de cada um dos experimentos</span>
+<span class="sd">    index_inicial : int, optional</span>
+<span class="sd">        index do dado a ser considerado como ponto de inicio, by default 0</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">        DataFrame contendo os dados originais com seus respectivos dados de output sendo </span>
+<span class="sd">            A coluna -1 = individuo</span>
+<span class="sd">            A coluna -2 = data</span>
+<span class="sd">            A coluna -3 = output (tipo de bebida)</span>
+<span class="sd">            A coluna -4 = canal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dados_originais</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">referencia_output</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">dados</span><span class="p">:</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">int_colun</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                <span class="n">index_inicial</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">dados_originais</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="n">column</span><span class="p">]),[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">column</span><span class="p">)),</span><span class="nb">int</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">referencia_output</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">dicionario_datas</span><span class="p">[</span><span class="n">data_experimento</span><span class="p">[</span><span class="n">referencia_output</span><span class="p">]]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">lista_individuos</span><span class="p">[</span><span class="n">referencia_output</span><span class="p">])]))</span>
+        <span class="n">referencia_output</span> <span class="o">=</span> <span class="n">referencia_output</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dados_originais</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="separa_dados_por_output"><a class="viewcode-back" href="../formata_dados.html#formata_dados.separa_dados_por_output">[docs]</a><span class="k">def</span> <span class="nf">separa_dados_por_output</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span> <span class="n">dicionario_output</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Separa os dados por bebida ingerida</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados : np.array</span>
+<span class="sd">        np.array de np.arrays contendo os dados dos experimentos com seus respectivos outputs</span>
+<span class="sd">    dicionario_output : dicionario</span>
+<span class="sd">        dicionario no qual chave = int e valor = str do tipo de bebida referente ao int</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dicionario</span>
+<span class="sd">        Dicionario contendo os dados separados por bebida</span>
+<span class="sd">            chave = bebida</span>
+<span class="sd">            valor = np.array contendo os np.arrays referentes aos dados correspondentes a bebida chave</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+ 
+    <span class="n">dicionario_separa_output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dicionario_output</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">dicionario_separa_output</span><span class="p">[</span><span class="n">dicionario_output</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">=</span><span class="p">(</span><span class="n">dados</span><span class="p">[</span><span class="n">dados</span><span class="p">[:,</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">dicionario_separa_output</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gustavo Voltani von Atzingen, Amanda Rodrigues da Silva
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

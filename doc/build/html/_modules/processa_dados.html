@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>processa_dados &mdash; sweetners_comparison_EEG  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> sweetners_comparison_EEG
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../formata_dados.html">formata_dados module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../processa_dados.html">processa_dados module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sweetners_comparison_EEG</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>processa_dados</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for processa_dados</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.fftpack</span> <span class="k">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftfreq</span>
+<span class="kn">from</span> <span class="nn">formata_dados</span> <span class="k">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="arredonda_predicao"><a class="viewcode-back" href="../processa_dados.html#processa_dados.arredonda_predicao">[docs]</a><span class="k">def</span> <span class="nf">arredonda_predicao</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">limite</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Arredonda o valor decimal da predicao para 0 ou 1 a partir de um limite</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    val : float</span>
+<span class="sd">        valor de output referente a predição do modelo</span>
+<span class="sd">    lim : float, optional</span>
+<span class="sd">        limite de arredondamento do output. Se o valor da predicao for maior do que o limite, o output é 1, caso contrario o output é 0. by default 0.5</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        valor do output referente a predição do modelo arredondado</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">valor</span> <span class="o">&gt;</span> <span class="n">limite</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="tempo_em_indice"><a class="viewcode-back" href="../processa_dados.html#processa_dados.tempo_em_indice">[docs]</a><span class="k">def</span> <span class="nf">tempo_em_indice</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">array_parcial</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">t_min</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">t_max</span><span class="o">=</span><span class="mf">18.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converte um tempo (s) dado no valor do index correspondente a este tempo no vetor de dados</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : float</span>
+<span class="sd">        tempo (segundos)</span>
+<span class="sd">    array_parcial : np.array or bool, optional</span>
+<span class="sd">        vetor parcial de dados referente a serie temporal do sinal considerando o intervalo de tempo (segundos) desejado. by default False</span>
+<span class="sd">    t_min : float, optional</span>
+<span class="sd">        tempo (segundos) minimo a ser considerado na serie, by default 0.0</span>
+<span class="sd">    t_max : float, optional</span>
+<span class="sd">        tempo (segundos) maximo a ser considerado na serie, by default 18.0</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        index do vetor referente ao tempo dado</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">array_parcial</span><span class="p">:</span>
+        <span class="n">tamanho_dados</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array_parcial</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tamanho_dados</span> <span class="o">=</span> <span class="mi">9220</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">tamanho_dados</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="p">(</span><span class="n">t_max</span><span class="o">-</span><span class="n">t_min</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="retorna_buckets"><a class="viewcode-back" href="../processa_dados.html#processa_dados.retorna_buckets">[docs]</a><span class="k">def</span> <span class="nf">retorna_buckets</span><span class="p">(</span><span class="n">fft_amps</span><span class="p">,</span> <span class="n">fft_freqs</span><span class="p">,</span> <span class="n">n_buckets</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">freq_min</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">freq_max</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;get one fft series and cut it in n_buckets, starting at freq_min and ending at freq_max</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fft_amps : np.array</span>
+<span class="sd">        amplitudes da onda</span>
+<span class="sd">    fft_freqs : np.array</span>
+<span class="sd">        frequencias contidas na onda, obtidas através da transformada de Fourier</span>
+<span class="sd">    n_buckets : int, optional</span>
+<span class="sd">        numero de buckets no qual a serie será particionada, by default 20</span>
+<span class="sd">    freq_min : int, optional</span>
+<span class="sd">        frequencia de inicio da serie, by default 8</span>
+<span class="sd">    freq_max : int, optional</span>
+<span class="sd">        frequencia final da serie, by default 40</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        buckets correspondentes a serie particionada</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">index_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">fft_freqs</span> <span class="o">&gt;</span> <span class="n">freq_min</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">index_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">fft_freqs</span> <span class="o">&gt;</span> <span class="n">freq_max</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">fft_freqs_corte</span> <span class="o">=</span> <span class="n">fft_freqs</span><span class="p">[</span><span class="n">index_min</span><span class="p">:</span><span class="n">index_max</span><span class="p">]</span>
+    <span class="n">fft_amps_corte</span> <span class="o">=</span> <span class="n">fft_amps</span><span class="p">[</span><span class="n">index_min</span><span class="p">:</span><span class="n">index_max</span><span class="p">]</span>
+    <span class="n">dados_bkts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">fft_amps_corte</span><span class="p">,</span> <span class="n">n_buckets</span><span class="p">)</span>
+    <span class="n">bkts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_buckets</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_buckets</span><span class="p">):</span>
+        <span class="n">bkts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dados_bkts</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">bkts</span></div>
+
+<div class="viewcode-block" id="converte_dados_buckets_fft"><a class="viewcode-back" href="../processa_dados.html#processa_dados.converte_dados_buckets_fft">[docs]</a><span class="k">def</span> <span class="nf">converte_dados_buckets_fft</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span> <span class="n">n_buckets</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retorna os buckets referentes a serie fft particionada</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados : np.array</span>
+<span class="sd">        np.array de np.arrays contendo um vetor de dados referente a serie temporal monitorada </span>
+<span class="sd">    n_buckets : int, optional</span>
+<span class="sd">       numero de buckets no qual a serie será particionada, by default 20</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        np.array de np.arrays contendo os buckets correspondentes a cada serie particionada</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dados_fft_bkt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">((</span><span class="n">dados</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_buckets</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dados_raw</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dados</span><span class="p">):</span>
+        <span class="n">amps</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">calculo_fft</span><span class="p">(</span><span class="n">dados_raw</span><span class="p">)</span>
+        <span class="n">bkts</span> <span class="o">=</span> <span class="n">retorna_buckets</span><span class="p">(</span><span class="n">amps</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">n_buckets</span><span class="p">)</span>
+        <span class="n">dados_fft_bkt</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">bkts</span>
+    <span class="k">return</span> <span class="n">dados_fft_bkt</span></div>
+
+<div class="viewcode-block" id="calc_preds"><a class="viewcode-back" href="../processa_dados.html#processa_dados.calc_preds">[docs]</a><span class="k">def</span> <span class="nf">calc_preds</span><span class="p">(</span><span class="n">lim</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calcula a porcentagem de acerto do modelo</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lim : float</span>
+<span class="sd">        Valor de arredondamento do output. Se o valor da predicao for maior do que o lim, o output é 1, caso contrário é 0.</span>
+<span class="sd">    X : np.array</span>
+<span class="sd">        vetor referente a serie temporal do sinal</span>
+<span class="sd">    y : int</span>
+<span class="sd">        valor referente ao output a ser predito</span>
+<span class="sd">    model : [type]</span>
+<span class="sd">        modelo de rede utilizado</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        porcentagem de acerto do modelo referente a agua e ao doce</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">agua</span><span class="p">,</span> <span class="n">agua_certo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">doce</span><span class="p">,</span> <span class="n">doce_certo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)):</span>     
+        <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">agua</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">arredonda_predicao</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">lim</span><span class="p">):</span>
+                <span class="n">agua_certo</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">doce</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">arredonda_predicao</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">lim</span><span class="p">):</span>
+                <span class="n">doce_certo</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="mi">100</span><span class="o">*</span><span class="n">agua_certo</span><span class="o">/</span><span class="n">agua</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="n">doce_certo</span><span class="o">/</span><span class="n">doce</span></div>
+
+
+<div class="viewcode-block" id="subconjunto_dados"><a class="viewcode-back" href="../processa_dados.html#processa_dados.subconjunto_dados">[docs]</a><span class="k">def</span> <span class="nf">subconjunto_dados</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">t_total</span><span class="o">=</span><span class="mf">18.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; seleciona os dados referente a um intervalo de tempo determinado</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados : np.array</span>
+<span class="sd">        vetor de dados referente a serie temporal monitorada</span>
+<span class="sd">    t_min : float</span>
+<span class="sd">        tempo (segundos) inicial a ser considerado na serie</span>
+<span class="sd">    t_max : float</span>
+<span class="sd">        tempo (segundos) final a ser considerado na serie</span>
+<span class="sd">    t_total : float, optional</span>
+<span class="sd">        tempo (segundos) total da serie, by default 18.0</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        vetor de dados referente a serie temporal monitorada entre o tempo considerado inicial e final</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tamanho_dados</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dados</span><span class="p">)</span>
+    <span class="n">index_min</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tamanho_dados</span><span class="o">*</span><span class="n">t_min</span><span class="o">/</span><span class="p">(</span><span class="n">t_max</span> <span class="o">-</span> <span class="n">t_min</span><span class="p">))</span>
+    <span class="n">index_max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tamanho_dados</span><span class="o">*</span><span class="n">t_max</span><span class="o">/</span><span class="p">(</span><span class="n">t_max</span> <span class="o">-</span> <span class="n">t_min</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">dados</span><span class="p">[</span><span class="n">index_min</span><span class="p">:</span><span class="n">index_max</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="remove_ruidos"><a class="viewcode-back" href="../processa_dados.html#processa_dados.remove_ruidos">[docs]</a><span class="k">def</span> <span class="nf">remove_ruidos</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span> <span class="n">drop_value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove as amplitudes consideradas ruídos em uma onda inserindo</span>
+<span class="sd">    i) o primeiro valor menor do que o de corte em [0] se o item [0] ultrapassar o limite</span>
+<span class="sd">    ii) o valor anterior em [n] se [n] ultrapassar o limite</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados : np.array</span>
+<span class="sd">        np.array de np.arrays contendo um vetor de dados referente a serie temporal monitorada</span>
+<span class="sd">    drop_value : float</span>
+<span class="sd">        Limite de amplitude considerado no sinal. Os pontos cuja amplitude for maior que esse valor são substituídos</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        np.array de np.arrays contendo um vetor de dados referente a serie temporal monitorada, porém com os pontos de ruídos substituídos</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dados_dropados</span> <span class="o">=</span> <span class="n">dados</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dados_dropados</span><span class="p">):</span>
+        <span class="n">drop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">&gt;</span><span class="n">drop_value</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">drop</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">drop</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">drop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">&gt;</span><span class="n">drop_value</span><span class="p">)</span>
+            <span class="n">j</span><span class="p">[</span><span class="n">drop</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="n">drop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">dados_dropados</span></div>
+
+<div class="viewcode-block" id="multiplica_dados"><a class="viewcode-back" href="../processa_dados.html#processa_dados.multiplica_dados">[docs]</a><span class="k">def</span> <span class="nf">multiplica_dados</span><span class="p">(</span><span class="n">dados_numpy_ok</span><span class="p">,</span> <span class="n">tempo_inicial</span><span class="p">,</span> <span class="n">tempo_final</span><span class="p">,</span> <span class="n">frequencia_amostragem</span><span class="p">,</span> <span class="n">janela_tempo</span><span class="p">,</span> <span class="n">tempo_passo</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Multiplica os dados gerando janelas de tempo menores a partir do vetor</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dados_numpy_ok : np.array</span>
+<span class="sd">        np.array de np.arrays contendo um vetor de dados referente a serie temporal monitorada</span>
+<span class="sd">    tempo_inicial : float</span>
+<span class="sd">        tempo a ser considerado como inicio da série (segundos)</span>
+<span class="sd">    tempo_final : float</span>
+<span class="sd">        tempo a ser considerado como fim da série (segundos)</span>
+<span class="sd">    frequencia_amostragem : int</span>
+<span class="sd">        frequencia de amostragem da série (Hz).</span>
+<span class="sd">    janela_tempo : float</span>
+<span class="sd">        tempo (segundos) contido em cada janela de dados a ser gerada</span>
+<span class="sd">    tempo_passo : float</span>
+<span class="sd">        tempo (segundos) equivalente a distância entre uma janela de dados e outra</span>
+<span class="sd">    output : np.array</span>
+<span class="sd">        np.array de np.arrays contendo os outputs relativos a cada experimento</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    return_data_slice : np.array</span>
+<span class="sd">        np.array de np.arrays contendo as janelas de dados geradas</span>
+<span class="sd">    return_data_output : np.array</span>
+<span class="sd">        np.array de np.arrays contendo os vetores de outputs referentes a cada janela de dados gerada</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">tempo_final</span> <span class="o">&gt;</span> <span class="n">tempo_inicial</span><span class="p">:</span>
+        <span class="n">n_slices</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">tempo_final</span> <span class="o">-</span> <span class="n">tempo_inicial</span> <span class="o">-</span> <span class="n">janela_tempo</span><span class="p">)</span><span class="o">/</span><span class="n">tempo_passo</span><span class="p">)</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tempo_inicial</span><span class="o">*</span><span class="n">frequencia_amostragem</span><span class="p">)</span>
+        <span class="n">end_index</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">tempo_final</span><span class="o">*</span><span class="n">frequencia_amostragem</span><span class="p">)</span>
+        <span class="n">return_data_slice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_slices</span><span class="o">*</span><span class="n">dados_numpy_ok</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">frequencia_amostragem</span><span class="o">*</span><span class="n">janela_tempo</span><span class="p">))</span>
+        <span class="n">return_data_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_slices</span><span class="o">*</span><span class="n">dados_numpy_ok</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dados_numpy_ok</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_slices</span><span class="p">):</span>
+                <span class="n">si</span> <span class="o">=</span> <span class="n">start_index</span> <span class="o">+</span> <span class="nb">int</span><span class="p">((</span><span class="n">j</span><span class="o">*</span><span class="n">tempo_passo</span><span class="o">*</span><span class="n">frequencia_amostragem</span><span class="p">))</span>
+                <span class="n">sf</span> <span class="o">=</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">frequencia_amostragem</span><span class="o">*</span><span class="n">janela_tempo</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="n">tempo_passo</span><span class="o">*</span><span class="n">frequencia_amostragem</span><span class="p">)</span>
+                <span class="n">return_data_slice</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">n_slices</span> <span class="o">+</span> <span class="n">j</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">dados_numpy_ok</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">si</span><span class="p">:</span><span class="n">sf</span><span class="p">]</span>
+                <span class="n">return_data_output</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">n_slices</span> <span class="o">+</span> <span class="n">j</span><span class="p">,]</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="k">return</span> <span class="n">return_data_slice</span><span class="p">,</span> <span class="n">return_data_output</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gustavo Voltani von Atzingen, Amanda Rodrigues da Silva
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

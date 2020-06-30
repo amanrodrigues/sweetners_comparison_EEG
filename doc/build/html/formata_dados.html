@@ -26,16 +26,18 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="processa_dados module" href="processa_dados.html" />
+    <link rel="prev" title="Welcome to sweetners_comparison_EEG’s documentation!" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,11 +82,12 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">formata_dados module</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">formata_dados module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processa_dados.html">processa_dados module</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -150,9 +153,9 @@
             
   <div class="section" id="module-formata_dados">
 <span id="formata-dados-module"></span><h1>formata_dados module<a class="headerlink" href="#module-formata_dados" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.arruma_output">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">arruma_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nomes_dos_arquivos_de_dados</span></em>, <em class="sig-param"><span class="n">output</span></em>, <em class="sig-param"><span class="n">acucar</span></em>, <em class="sig-param"><span class="n">agua</span></em>, <em class="sig-param"><span class="n">sucralose</span></em>, <em class="sig-param"><span class="n">aspartame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.arruma_output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">arruma_output</code><span class="sig-paren">(</span><em class="sig-param">nomes_dos_arquivos_de_dados</em>, <em class="sig-param">output</em>, <em class="sig-param">acucar</em>, <em class="sig-param">agua</em>, <em class="sig-param">sucralose</em>, <em class="sig-param">aspartame</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#arruma_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.arruma_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gera uma lista com a sequencia das bebidas ingeridas em cada experimento</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -175,9 +178,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.calculo_fft">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">calculo_fft</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">frequencia_de_amostragem</span><span class="o">=</span><span class="default_value">512</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.calculo_fft" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">calculo_fft</code><span class="sig-paren">(</span><em class="sig-param">dados</em>, <em class="sig-param">frequencia_de_amostragem=512</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#calculo_fft"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.calculo_fft" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calcula as amplitudes e frequencias contidas na onda através da transformada de Fourier</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -196,9 +199,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.completa_dados">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">completa_dados</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">output</span></em>, <em class="sig-param"><span class="n">dicionario_datas</span></em>, <em class="sig-param"><span class="n">lista_individuos</span></em>, <em class="sig-param"><span class="n">data_experimento</span></em>, <em class="sig-param"><span class="n">index_inicial</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.completa_dados" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">completa_dados</code><span class="sig-paren">(</span><em class="sig-param">dados</em>, <em class="sig-param">output</em>, <em class="sig-param">dicionario_datas</em>, <em class="sig-param">lista_individuos</em>, <em class="sig-param">data_experimento</em>, <em class="sig-param">index_inicial=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#completa_dados"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.completa_dados" title="Permalink to this definition">¶</a></dt>
 <dd><p>Insere as referências de outputs nos dados</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -227,9 +230,9 @@ A coluna -4 = canal</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.cria_dicionario_output">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">cria_dicionario_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.cria_dicionario_output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">cria_dicionario_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#cria_dicionario_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.cria_dicionario_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cria dicionario que vincule o nome do arquivo à bebida ingerida</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -241,9 +244,9 @@ A coluna -4 = canal</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.enumera_dicionario">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">enumera_dicionario</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista_itens</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.enumera_dicionario" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">enumera_dicionario</code><span class="sig-paren">(</span><em class="sig-param">lista_itens</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#enumera_dicionario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.enumera_dicionario" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cria dicionario atribuindo o index (int) do elemento na lista como chave e o elemento como valor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -260,9 +263,9 @@ Exemplo2: [‘int’,’int’,’int’];</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.gera_lista_individuos">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">gera_lista_individuos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">individuos</span></em>, <em class="sig-param"><span class="n">camilamendes</span></em>, <em class="sig-param"><span class="n">camila</span></em>, <em class="sig-param"><span class="n">beatriz</span></em>, <em class="sig-param"><span class="n">carolmonica</span></em>, <em class="sig-param"><span class="n">isabella</span></em>, <em class="sig-param"><span class="n">isaperon</span></em>, <em class="sig-param"><span class="n">lais</span></em>, <em class="sig-param"><span class="n">mariaclara</span></em>, <em class="sig-param"><span class="n">orlando</span></em>, <em class="sig-param"><span class="n">rafa</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.gera_lista_individuos" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">gera_lista_individuos</code><span class="sig-paren">(</span><em class="sig-param">individuos</em>, <em class="sig-param">camilamendes</em>, <em class="sig-param">camila</em>, <em class="sig-param">beatriz</em>, <em class="sig-param">carolmonica</em>, <em class="sig-param">isabella</em>, <em class="sig-param">isaperon</em>, <em class="sig-param">lais</em>, <em class="sig-param">mariaclara</em>, <em class="sig-param">orlando</em>, <em class="sig-param">rafa</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#gera_lista_individuos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.gera_lista_individuos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gera uma lista com a sequencia dos voluntarios em cada experimento</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -289,9 +292,9 @@ Exemplo2: [‘int’,’int’,’int’];</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.inverte_enumera_dicionario">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">inverte_enumera_dicionario</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista_itens</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.inverte_enumera_dicionario" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">inverte_enumera_dicionario</code><span class="sig-paren">(</span><em class="sig-param">lista_itens</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#inverte_enumera_dicionario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.inverte_enumera_dicionario" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cria dicionario atribuindo o index (int) do elemento na lista como valor e o elemento como chave.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -306,9 +309,9 @@ Exemplo2: [‘int’,’int’,’int’];</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.le_dados_EEG">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">le_dados_EEG</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.le_dados_EEG" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">le_dados_EEG</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#le_dados_EEG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.le_dados_EEG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lê os arquivos</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -327,9 +330,9 @@ valor = lista com os dados dispostos em 3 colunas: tempo, canal 1 e canal 2</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.padroniza_dados">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">padroniza_dados</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista_dados</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.padroniza_dados" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">padroniza_dados</code><span class="sig-paren">(</span><em class="sig-param">lista_dados</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#padroniza_dados"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.padroniza_dados" title="Permalink to this definition">¶</a></dt>
 <dd><p>Elimina os títulos das colunas, nos arquivos que possuem título, deixando todos os dados com o mesmo tamanho e formato</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -345,9 +348,9 @@ valor = lista com os dados dispostos em 3 colunas: tempo, canal 1 e canal 2</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.separa_dados_por_output">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">separa_dados_por_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados</span></em>, <em class="sig-param"><span class="n">dicionario_output</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.separa_dados_por_output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">separa_dados_por_output</code><span class="sig-paren">(</span><em class="sig-param">dados</em>, <em class="sig-param">dicionario_output</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#separa_dados_por_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.separa_dados_por_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Separa os dados por bebida ingerida</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -370,9 +373,9 @@ valor = np.array contendo os np.arrays referentes aos dados correspondentes a be
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.valida_dados">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">valida_dados</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados_numpy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.valida_dados" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">valida_dados</code><span class="sig-paren">(</span><em class="sig-param">dados_numpy</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#valida_dados"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.valida_dados" title="Permalink to this definition">¶</a></dt>
 <dd><p>Avalia se a maior parte das frequencias da série está em um intervalo esperado para sinal cerebral</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -388,9 +391,9 @@ valor = np.array contendo os np.arrays referentes aos dados correspondentes a be
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="formata_dados.valida_sinal_eeg">
-<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">valida_sinal_eeg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dados_array</span></em>, <em class="sig-param"><span class="n">lim</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">freq_corte_1</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="n">freq_corte_2</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">freq_corte_3</span><span class="o">=</span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formata_dados.valida_sinal_eeg" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">formata_dados.</code><code class="sig-name descname">valida_sinal_eeg</code><span class="sig-paren">(</span><em class="sig-param">dados_array</em>, <em class="sig-param">lim=0.1</em>, <em class="sig-param">freq_corte_1=15</em>, <em class="sig-param">freq_corte_2=50</em>, <em class="sig-param">freq_corte_3=100</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/formata_dados.html#valida_sinal_eeg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#formata_dados.valida_sinal_eeg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Avalia se um dado tem formato de EEG para facilitar a remoção dos dados com ruido. É considerado sinal de EEG o dado em que a maior parte das frequencias esteja entre freq_corte_1 e freq_corte_2.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -419,6 +422,15 @@ valor = np.array contendo os np.arrays referentes aos dados correspondentes a be
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="processa_dados.html" class="btn btn-neutral float-right" title="processa_dados module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to sweetners_comparison_EEG’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
