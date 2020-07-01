@@ -9,4 +9,9 @@ sucrose from those one sweetened with low-calorie sweeteners (sucrose and sucral
 
 # Arquivos
 ### data -> 
-#### EXPERIMENTO OFICIAL 2019 -> dados brutos coletados durante os experimentos
+##### EXPERIMENTO OFICIAL 2019 -> dados brutos coletados durante os experimento
+##### Pickles -> pickles dos dados processados
+### src -> 
+##### Arruma_dados -> arquivo que processa os dados e gera os pickles
+##### classificador -> rede neural classificadora
+### results -> resultados das classificacoes
