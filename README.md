@@ -8,3 +8,5 @@ neural network (DNN). Results indicated that brain responses distinguish juice s
 sucrose from those one sweetened with low-calorie sweeteners (sucrose and sucralose).
 
 # Arquivos
+### data -> 
+#### EXPERIMENTO OFICIAL 2019 -> dados brutos coletados durante os experimentos
