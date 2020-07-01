@@ -19,8 +19,8 @@ sys.setrecursionlimit(1500)
 # -- Project information -----------------------------------------------------
 
 project = 'sweetners_comparison_EEG'
-copyright = '2020, Gustavo Voltani von Atzingen, Amanda Rodrigues da Silva'
-author = 'Gustavo Voltani von Atzingen, Amanda Rodrigues da Silva'
+copyright = '2020, Gustavo Voltani von Atzingen, Amanda Rodrigues da Silva, Ana Carolina de Sousa Silva'
+author = 'Gustavo Voltani von Atzingen, Amanda Rodrigues da Silva, Ana Carolina de Sousa Silva'
 
 
 # -- General configuration ---------------------------------------------------
@@ -36,7 +36,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon', 'nbsphinx'
 ]
 
 napoleon_google_docstring = True

@@ -14,12 +14,11 @@ Welcome to sweetners_comparison_EEG's documentation!
    formata_dados
    processa_dados
 
-
 Notebooks
 ======================
 .. raw:: html
 
-    <iframe src="_static/Classificador.html" height="645px" width="100%"></iframe>
+    <iframe src="_static/Arruma_dados.html" height="645px" width="100%"></iframe>
 
 
 Indices and tables
