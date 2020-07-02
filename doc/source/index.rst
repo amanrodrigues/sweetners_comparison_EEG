@@ -19,6 +19,7 @@ Notebooks
 .. raw:: html
 
     <iframe src="_static/Arruma_dados.html" height="645px" width="100%"></iframe>
+    <iframe src="_static/classificador.html" height="645px" width="100%"></iframe>
 
 
 Indices and tables
